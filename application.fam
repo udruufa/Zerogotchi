@@ -1,0 +1,15 @@
+App(
+    appid="zerogotchi",
+    name="Zerogotchi",
+    apptype=FlipperAppType.EXTERNAL,
+    entry_point="zerogotchi_app",
+    cdefines=["APP_ZEROGOTCHI"],
+    requires=[
+        "gui",
+    ],
+    stack_size=1 * 1024,
+    order=90,
+    fap_icon="zerogotchi_icon.png",
+    fap_category="Games",
+    fap_icon_assets="assets",
+)
