@@ -117,7 +117,10 @@ void handle_input_game_TicTacToe(ZerogotchiEvent* event, AppContext* app) {
 void draw_game_TicTacToe(Canvas* canvas) {
     canvas_clear(canvas);
 
-    canvas_draw_icon(canvas, 0, 0, &I_frame);
+    canvas_draw_icon(canvas, 0, 37, &I_hands);
+    canvas_draw_icon(canvas, 0, 0, &I_dolphins_hands);
+
+    canvas_draw_icon(canvas, 39, 7, &I_board);
 
     canvas_draw_icon(canvas, square_x, square_y, &I_square);
 
