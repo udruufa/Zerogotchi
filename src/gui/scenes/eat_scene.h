@@ -4,4 +4,4 @@
 
 #include "../../constants.h"
 
-void draw_eat_scene(Canvas* canvas, uint32_t current_y);
+void draw_eat_scene(Canvas* canvas, uint32_t current_y, uint32_t pet_type);

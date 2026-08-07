@@ -4,12 +4,20 @@
 #include <zerogotchi_icons.h>
 
 typedef enum {
+    DOLPHIN,
+    DRAGON,
+    RABBIT,
+    COUNT_TYPE
+} ZerogotchiType;
+
+typedef enum {
     BABY,
     TEEN,
     ADULT
 } ZerogotchiStage;
 
 typedef struct {
+    ZerogotchiType type;
     ZerogotchiStage stage;
 
     uint32_t health;
@@ -38,7 +46,7 @@ typedef enum {
     sleep,
     heal,
     info,
-    COUNT
+    COUNT_ACTION
 } ZerogotchiSelectAction;
 
 typedef enum {
@@ -54,6 +62,9 @@ typedef enum {
     waking_up,
     healing,
     informing,
+    menu,
+    settings,
+    pet_selection
 } ZerogotchiAction;
 
 typedef struct {

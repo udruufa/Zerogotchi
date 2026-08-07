@@ -23,6 +23,8 @@ static void init_new_game() {
 
     app.game_stats.last_save_time = furi_hal_rtc_get_timestamp();
     app.game_stats.load_time = furi_hal_rtc_get_timestamp();
+
+    app.action = settings;
 }
 
 int32_t zerogotchi_app(void* p) {
@@ -62,6 +64,8 @@ int32_t zerogotchi_app(void* p) {
                 handle_input_game_TicTacToe(&event, &app);
             else if(app.action == game_NoSignal)
                 handle_input_game_NoSignal(&event, &app);
+            else if(app.action == game_Memory)
+                handle_input_game_Memory(&event, &app);
             else if(handle_input(&event, &app))
                 break;
         } else if(event.type == EventTypeTick) {

@@ -4,14 +4,40 @@ void draw_info_scene(Canvas* canvas, AppContext* app) {
     char str[64];
     canvas_clear(canvas);
 
-    if(app->game_stats.is_sleeping)
-        canvas_draw_icon(canvas, 90, 2, &I_dolphin_info_sleep);
-    else if(app->game_stats.health < 10)
-        canvas_draw_icon(canvas, 90, 2, &I_dolphin_info_ill);
-    else if(app->game_stats.hunger < 10 || app->game_stats.happiness < 10)
-        canvas_draw_icon(canvas, 90, 2, &I_dolphin_info_sad);
-    else
-        canvas_draw_icon(canvas, 90, 2, &I_dolphin_info_happy);
+    switch(app->game_stats.type) {
+    case(DOLPHIN):
+        if(app->game_stats.is_sleeping)
+            canvas_draw_icon(canvas, ASSET_X, ASSET_Y, &I_dolphin_sleep);
+        else if(app->game_stats.health < 10)
+            canvas_draw_icon(canvas, ASSET_X, ASSET_Y, &I_dolphin_ill);
+        else if(app->game_stats.hunger < 10 || app->game_stats.happiness < 10)
+            canvas_draw_icon(canvas, ASSET_X, ASSET_Y, &I_dolphin_sad);
+        else
+            canvas_draw_icon(canvas, ASSET_X, ASSET_Y, &I_dolphin_happy);
+        break;
+    case(DRAGON):
+        if(app->game_stats.is_sleeping)
+            canvas_draw_icon(canvas, ASSET_X, ASSET_Y, &I_dragon_sleep);
+        else if(app->game_stats.health < 10)
+            canvas_draw_icon(canvas, ASSET_X, ASSET_Y, &I_dragon_ill);
+        else if(app->game_stats.hunger < 10 || app->game_stats.happiness < 10)
+            canvas_draw_icon(canvas, ASSET_X, ASSET_Y, &I_dragon_sad);
+        else
+            canvas_draw_icon(canvas, ASSET_X, ASSET_Y, &I_dragon_happy);
+        break;
+    case(RABBIT):
+        if(app->game_stats.is_sleeping)
+            canvas_draw_icon(canvas, ASSET_X, ASSET_Y, &I_rabbit_sleep);
+        else if(app->game_stats.health < 10)
+            canvas_draw_icon(canvas, ASSET_X, ASSET_Y, &I_rabbit_ill);
+        else if(app->game_stats.hunger < 10 || app->game_stats.happiness < 10)
+            canvas_draw_icon(canvas, ASSET_X, ASSET_Y, &I_rabbit_sad);
+        else
+            canvas_draw_icon(canvas, ASSET_X, ASSET_Y, &I_rabbit_happy);
+        break;
+    default:
+        break;
+    }
 
     canvas_set_font(canvas, FontPrimary);
     snprintf(str, sizeof(str), "%s | lvl %ld", NAME, app->game_stats.lvl);
