@@ -2,15 +2,16 @@
 
 Virtual pet for Flipper Zero with zero purpose and questionable survival instincts.
 
-![Zerogotchi title screen](images/zerogotchi.png)
+![Zerogotchi title screen](images/title.png#gh-light-mode-only)
+![Zerogotchi title screen](images/dark_mode/title_inv.png#gh-dark-mode-only)
 
 ## Features
 
 ### Adopt a pet
 
-| Dolphin | Dragon | Rabbit |
-| ------- | ------ | ------ |
-| ![Dolphin](images/dolphin.gif) | ![Dragon](images/dragon.gif) | ![Rabbit](images/rabbit.gif) |
+| Dolphin | Dragon | Rabbit | Turtle |
+| ------- | ------ | ------ | ------ |
+| ![Dolphin](images/dolphin.gif#gh-light-mode-only)![Dolphin](images/dark_mode/dolphin_inv.gif#gh-dark-mode-only) | ![Dragon](images/dragon.gif#gh-light-mode-only)![Dragon](images/dark_mode/dragon_inv.gif#gh-dark-mode-only) | ![Rabbit](images/rabbit.gif#gh-light-mode-only)![Rabbit](images/dark_mode/rabbit_inv.gif#gh-dark-mode-only) | ![Turtle](images/turtle.gif#gh-light-mode-only)![Turtle](images/dark_mode/turtle_inv.gif#gh-dark-mode-only) |
 
 Choose your pet! Your **pet's name** is the name stored in your Flipper's system.
 
@@ -18,11 +19,12 @@ Choose your pet! Your **pet's name** is the name stored in your Flipper's system
 
 The pet has three growth stages: **child**, **teen**, and **adult**.
 
-![Life stages](images/life_stages.gif)
+![Life Stages](images/life_stages.gif#gh-light-mode-only)
+![Life Stages](images/dark_mode/life_stages_inv.gif#gh-dark-mode-only)
 
 It grows as it gains experience and levels up.
 
-### <img align="absmiddle" src="images/eat.png" /> Feeding
+### <img align="absmiddle" src="images/eat.png#gh-light-mode-only"/><img align="absmiddle" src="images/dark_mode/eat_inv.png#gh-dark-mode-only"/> Feeding
 
 You can feed your pet one of **3 different dishes** or a **treat**. Each option affects its stats in a slightly different way.
 * **Dish 1**: +2 happiness, +3 hunger
@@ -32,13 +34,13 @@ You can feed your pet one of **3 different dishes** or a **treat**. Each option 
 
 *Keep in mind that feeding your pet too many treats isn't the best choice!*
 
-### <img align="absmiddle" src="images/pet.png" /> Petting
+### <img align="absmiddle" src="images/pet.png#gh-light-mode-only"/><img align="absmiddle" src="images/dark_mode/pet_inv.png#gh-dark-mode-only"/> Petting
 
 You can pet your pet to make it happy!
 
 ![Petting](images/petting.png)
 
-### <img align="absmiddle" src="images/play.png" /> Playing
+### <img align="absmiddle" src="images/play.png#gh-light-mode-only"/><img align="absmiddle" src="images/dark_mode/play_inv.png#gh-dark-mode-only"/> Playing
 
 There are three mini-games here to pass the time with your pet.
 * **Tic Tac Toe**: Classic tic-tac-toe game
@@ -49,20 +51,20 @@ There are three mini-games here to pass the time with your pet.
 | ------------------------------------------- | ---------------------------------------- | ---------------------------------------- |
 | ![Tic Tac Toe](images/TicTacToe_screen.png) | ![No Signal](images/NoSignal_screen.png) | ![No Signal](images/NoSignal_screen.png) |
 
-### <img align="absmiddle" src="images/sleep.png" /> Sleeping
+### <img align="absmiddle" src="images/sleep.png#gh-light-mode-only"/><img align="absmiddle" src="images/dark_mode/sleep_inv.png#gh-dark-mode-only"/> Sleeping
 
 The pet should rest so that it doesn't get tired too quickly!
 
 The sleep lasts 8 hours, but it can be interrupted at any moment. *However, this will have a negative effect on the pet.*
 
-### <img align="absmiddle" src="images/heal.png" /> Healing
+### <img align="absmiddle" src="images/heal.png#gh-light-mode-only"/><img align="absmiddle" src="images/dark_mode/heal_inv.png#gh-dark-mode-only"/> Healing
 
 You can heal your pet with one of **3 different medicines**. Each option affects its stats in a slightly different way.
 * **Vitamins**: +2 health, -1 happiness
 * **Pills**: +4 health, -2 happiness
 * **Injection**: +5 health, -4 happiness
 
-### <img align="absmiddle" src="images/info.png" /> Status check
+### <img align="absmiddle" src="images/info.png#gh-light-mode-only"/><img align="absmiddle" src="images/dark_mode/info_inv.png#gh-dark-mode-only"/> Status check
 
 On the information tab, you can view detailed information about your pet. 
 
@@ -76,7 +78,7 @@ You can also see your pet's current mood here:
 
 |               Happy                |              Sad               |              Ill               |               Sleep                |
 | ---------------------------------- | ------------------------------ | ------------------------------ | ---------------------------------- |
-| ![Happy](images/dolphin_happy.png) | ![Sad](images/dolphin_sad.png) | ![Ill](images/dolphin_ill.png) | ![Sleep](images/dolphin_sleep.png) |
+| ![Happy](images/dolphin_happy.png#gh-light-mode-only)![Happy](images/dark_mode/dolphin_happy_inv.png#gh-dark-mode-only) | ![Sad](images/dolphin_sad.png#gh-light-mode-only)![Sad](images/dark_mode/dolphin_sad_inv.png#gh-dark-mode-only) | ![Ill](images/dolphin_ill.png#gh-light-mode-only)![Ill](images/dark_mode/dolphin_ill_inv.png#gh-dark-mode-only) | ![Sleep](images/dolphin_sleep.png#gh-light-mode-only)![Sleep](images/dark_mode/dolphin_sleep_inv.png#gh-dark-mode-only) |
 
 If your pet has low stats, it will be harder to get them back to normal, but your pet will still *always be with you*.
 
