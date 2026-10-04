@@ -35,6 +35,16 @@ void draw_info_scene(Canvas* canvas, AppContext* app) {
         else
             canvas_draw_icon(canvas, ASSET_X, ASSET_Y, &I_rabbit_happy);
         break;
+    case(TURTLE):
+        if(app->game_stats.is_sleeping)
+            canvas_draw_icon(canvas, ASSET_X, ASSET_Y, &I_turtle_sleep);
+        else if(app->game_stats.health < 10)
+            canvas_draw_icon(canvas, ASSET_X, ASSET_Y, &I_turtle_ill);
+        else if(app->game_stats.hunger < 10 || app->game_stats.happiness < 10)
+            canvas_draw_icon(canvas, ASSET_X, ASSET_Y, &I_turtle_sad);
+        else
+            canvas_draw_icon(canvas, ASSET_X, ASSET_Y, &I_turtle_happy);
+        break;
     default:
         break;
     }

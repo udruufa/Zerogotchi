@@ -4,6 +4,7 @@ static const char* const food[][4] = {
     {"Sardine", "Squid", "Mackerel", "Icefish"},
     {"Charred elk", "Roasted ram", "Wild boar", "Gold ore"},
     {"Hay", "Lettuce", "Carrot", "Banana slices"},
+    {"Fresh greens", "Veggies", "Fish pellets", "Pizza"},
 };
 
 void draw_eat_scene(Canvas* canvas, uint32_t current_y, uint32_t pet_type) {

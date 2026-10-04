@@ -7,6 +7,7 @@ typedef enum {
     DOLPHIN,
     DRAGON,
     RABBIT,
+    TURTLE,
     COUNT_TYPE
 } ZerogotchiType;
 

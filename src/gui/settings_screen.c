@@ -18,6 +18,12 @@ static const Icon* rabbit_baby_frames[] = {
     &I_rabbit_baby_2,
     &I_rabbit_baby_3,
 };
+static const Icon* turtle_baby_frames[] = {
+    &I_turtle_baby_0,
+    &I_turtle_baby_1,
+    &I_turtle_baby_2,
+    &I_turtle_baby_3,
+};
 
 void draw_settings_screen(Canvas* canvas, void* ctx) {
     AppContext* app = ctx;
@@ -40,6 +46,10 @@ void draw_settings_screen(Canvas* canvas, void* ctx) {
     case(RABBIT):
         elements_multiline_text_aligned(canvas, 64, 52, AlignCenter, AlignCenter, "Rabbit");
         canvas_draw_icon(canvas, 52, 20, rabbit_baby_frames[app->animation.animation_frame]);
+        break;
+    case(TURTLE):
+        elements_multiline_text_aligned(canvas, 64, 52, AlignCenter, AlignCenter, "Turtle");
+        canvas_draw_icon(canvas, 52, 20, turtle_baby_frames[app->animation.animation_frame]);
         break;
     default:
         break;

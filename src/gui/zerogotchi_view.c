@@ -51,6 +51,17 @@ static const Icon* dolphin_adult_sleeping_frames[] = {
     &I_dolphin_adult_sleeping_3,
 };
 
+static const Icon* dolphin_pet_frames[] = {
+    &I_dolphin_pet_animation_0,
+    &I_dolphin_pet_animation_1,
+    &I_dolphin_pet_animation_2,
+    &I_dolphin_pet_animation_3,
+    &I_dolphin_pet_animation_4,
+    &I_dolphin_pet_animation_5,
+    &I_dolphin_pet_animation_6,
+    &I_dolphin_pet_animation_7,
+};
+
 // DRAGON
 
 static const Icon* dragon_baby_frames[] = {
@@ -90,6 +101,17 @@ static const Icon* dragon_adult_sleeping_frames[] = {
     &I_dragon_adult_sleeping_1,
     &I_dragon_adult_sleeping_2,
     &I_dragon_adult_sleeping_3,
+};
+
+static const Icon* dragon_pet_frames[] = {
+    &I_dragon_pet_animation_0,
+    &I_dragon_pet_animation_1,
+    &I_dragon_pet_animation_2,
+    &I_dragon_pet_animation_3,
+    &I_dragon_pet_animation_4,
+    &I_dragon_pet_animation_5,
+    &I_dragon_pet_animation_6,
+    &I_dragon_pet_animation_7,
 };
 
 // RABBIT
@@ -133,6 +155,69 @@ static const Icon* rabbit_adult_sleeping_frames[] = {
     &I_rabbit_adult_sleeping_3,
 };
 
+static const Icon* rabbit_pet_frames[] = {
+    &I_rabbit_pet_animation_0,
+    &I_rabbit_pet_animation_1,
+    &I_rabbit_pet_animation_2,
+    &I_rabbit_pet_animation_3,
+    &I_rabbit_pet_animation_4,
+    &I_rabbit_pet_animation_5,
+    &I_rabbit_pet_animation_6,
+    &I_rabbit_pet_animation_7,
+};
+
+// TURTLE
+
+static const Icon* turtle_baby_frames[] = {
+    &I_turtle_baby_0,
+    &I_turtle_baby_1,
+    &I_turtle_baby_2,
+    &I_turtle_baby_3,
+};
+static const Icon* turtle_baby_sleeping_frames[] = {
+    &I_turtle_baby_sleeping_0,
+    &I_turtle_baby_sleeping_1,
+    &I_turtle_baby_sleeping_2,
+    &I_turtle_baby_sleeping_3,
+};
+
+static const Icon* turtle_teen_frames[] = {
+    &I_turtle_teen_0,
+    &I_turtle_teen_1,
+    &I_turtle_teen_2,
+    &I_turtle_teen_3,
+};
+static const Icon* turtle_teen_sleeping_frames[] = {
+    &I_turtle_teen_sleeping_0,
+    &I_turtle_teen_sleeping_1,
+    &I_turtle_teen_sleeping_2,
+    &I_turtle_teen_sleeping_3,
+};
+
+static const Icon* turtle_adult_frames[] = {
+    &I_turtle_adult_0,
+    &I_turtle_adult_1,
+    &I_turtle_adult_2,
+    &I_turtle_adult_3,
+};
+static const Icon* turtle_adult_sleeping_frames[] = {
+    &I_turtle_adult_sleeping_0,
+    &I_turtle_adult_sleeping_1,
+    &I_turtle_adult_sleeping_2,
+    &I_turtle_adult_sleeping_3,
+};
+
+static const Icon* turtle_pet_frames[] = {
+    &I_turtle_pet_animation_0,
+    &I_turtle_pet_animation_1,
+    &I_turtle_pet_animation_2,
+    &I_turtle_pet_animation_3,
+    &I_turtle_pet_animation_4,
+    &I_turtle_pet_animation_5,
+    &I_turtle_pet_animation_6,
+    &I_turtle_pet_animation_7,
+};
+
 // ANIMATIONS
 
 static const Icon* full_frames[] = {
@@ -144,26 +229,6 @@ static const Icon* full_frames[] = {
     &I_full_animation_5,
     &I_full_animation_6,
     &I_full_animation_7,
-};
-static const Icon* dolphin_pet_frames[] = {
-    &I_dolphin_pet_animation_0,
-    &I_dolphin_pet_animation_1,
-    &I_dolphin_pet_animation_2,
-    &I_dolphin_pet_animation_3,
-    &I_dolphin_pet_animation_4,
-    &I_dolphin_pet_animation_5,
-    &I_dolphin_pet_animation_6,
-    &I_dolphin_pet_animation_7,
-};
-static const Icon* rabbit_pet_frames[] = {
-    &I_rabbit_pet_animation_0,
-    &I_rabbit_pet_animation_1,
-    &I_rabbit_pet_animation_2,
-    &I_rabbit_pet_animation_3,
-    &I_rabbit_pet_animation_4,
-    &I_rabbit_pet_animation_5,
-    &I_rabbit_pet_animation_6,
-    &I_rabbit_pet_animation_7,
 };
 static const Icon* sleep_frames[] = {
     &I_sleep_animation_0,
@@ -306,6 +371,45 @@ void draw_callback(Canvas* canvas, void* ctx) {
                 break;
             }
             break;
+        case(TURTLE):
+            switch(app->game_stats.stage) {
+            case(BABY):
+                if(app->game_stats.is_sleeping)
+                    canvas_draw_icon(
+                        canvas,
+                        52,
+                        20,
+                        turtle_baby_sleeping_frames[app->animation.animation_frame]);
+                else
+                    canvas_draw_icon(
+                        canvas, 50, 20, turtle_baby_frames[app->animation.animation_frame]);
+                break;
+            case(TEEN):
+                if(app->game_stats.is_sleeping)
+                    canvas_draw_icon(
+                        canvas,
+                        48,
+                        22,
+                        turtle_teen_sleeping_frames[app->animation.animation_frame]);
+                else
+                    canvas_draw_icon(
+                        canvas, 49, 22, turtle_teen_frames[app->animation.animation_frame]);
+                break;
+            case(ADULT):
+                if(app->game_stats.is_sleeping)
+                    canvas_draw_icon(
+                        canvas,
+                        40,
+                        15,
+                        turtle_adult_sleeping_frames[app->animation.animation_frame]);
+                else
+                    canvas_draw_icon(
+                        canvas, 40, 15, turtle_adult_frames[app->animation.animation_frame]);
+                break;
+            default:
+                break;
+            }
+            break;
         default:
             break;
         }
@@ -415,11 +519,29 @@ void draw_callback(Canvas* canvas, void* ctx) {
                 canvas_draw_icon(canvas, 0, 0, sleep_frames[app->animation.animation_frame]);
             }
             break;
+        case(DRAGON):
+            if(app->selectedAction == eat)
+                canvas_draw_icon(canvas, 0, 0, full_frames[app->animation.animation_frame]);
+            else if(app->selectedAction == pet)
+                canvas_draw_icon(canvas, 0, 0, dragon_pet_frames[app->animation.animation_frame]);
+            else if(app->selectedAction == sleep) {
+                canvas_draw_icon(canvas, 0, 0, sleep_frames[app->animation.animation_frame]);
+            }
+            break;
         case(RABBIT):
             if(app->selectedAction == eat)
                 canvas_draw_icon(canvas, 0, 0, full_frames[app->animation.animation_frame]);
             else if(app->selectedAction == pet)
                 canvas_draw_icon(canvas, 0, 0, rabbit_pet_frames[app->animation.animation_frame]);
+            else if(app->selectedAction == sleep) {
+                canvas_draw_icon(canvas, 0, 0, sleep_frames[app->animation.animation_frame]);
+            }
+            break;
+        case(TURTLE):
+            if(app->selectedAction == eat)
+                canvas_draw_icon(canvas, 0, 0, full_frames[app->animation.animation_frame]);
+            else if(app->selectedAction == pet)
+                canvas_draw_icon(canvas, 0, 0, turtle_pet_frames[app->animation.animation_frame]);
             else if(app->selectedAction == sleep) {
                 canvas_draw_icon(canvas, 0, 0, sleep_frames[app->animation.animation_frame]);
             }
