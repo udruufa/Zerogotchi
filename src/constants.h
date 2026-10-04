@@ -31,6 +31,8 @@
 
 #define CHOICE_SCENE_X 48
 
+#define SETTINGS_RESTART_Y 20
+
 #define FOOD_SARDINE_Y  8
 #define FOOD_SQUID_Y    20
 #define FOOD_MACKEREL_Y 32

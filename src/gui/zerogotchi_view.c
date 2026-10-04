@@ -1,5 +1,4 @@
 #include "zerogotchi_view.h"
-#include "menu_view.h"
 #include "settings_screen.h"
 #include "scenes/eat_scene.h"
 #include "scenes/play_scene.h"
@@ -433,33 +432,37 @@ void draw_callback(Canvas* canvas, void* ctx) {
 
     // Actions
 
-    canvas_draw_icon(canvas, 8, 50, &I_eat);
-    canvas_draw_icon(canvas, 28, 50, &I_pet);
-    canvas_draw_icon(canvas, 48, 50, &I_play);
-    canvas_draw_icon(canvas, 68, 50, &I_sleep);
-    canvas_draw_icon(canvas, 88, 50, &I_heal);
-    canvas_draw_icon(canvas, 108, 50, &I_info);
+    canvas_draw_icon(canvas, 4, 50, &I_eat);
+    canvas_draw_icon(canvas, 22, 50, &I_pet);
+    canvas_draw_icon(canvas, 40, 50, &I_play);
+    canvas_draw_icon(canvas, 58, 50, &I_sleep);
+    canvas_draw_icon(canvas, 76, 50, &I_heal);
+    canvas_draw_icon(canvas, 94, 50, &I_info);
+    canvas_draw_icon(canvas, 112, 50, &I_settings);
 
     switch(app->selectedAction) {
     case 0:
-        canvas_draw_icon(canvas, 7, 49, &I_eat_hover);
+        canvas_draw_icon(canvas, 3, 49, &I_eat_hover);
         break;
     case 1:
-        canvas_draw_icon(canvas, 27, 49, &I_pet_hover);
+        canvas_draw_icon(canvas, 21, 49, &I_pet_hover);
         break;
     case 2:
-        canvas_draw_icon(canvas, 47, 49, &I_play_hover);
+        canvas_draw_icon(canvas, 39, 49, &I_play_hover);
         break;
     case 3:
-        canvas_draw_icon(canvas, 67, 49, &I_sleep_hover);
+        canvas_draw_icon(canvas, 57, 49, &I_sleep_hover);
         break;
     case 4:
-        canvas_draw_icon(canvas, 87, 49, &I_heal_hover);
+        canvas_draw_icon(canvas, 75, 49, &I_heal_hover);
         break;
     case 5:
-        canvas_draw_icon(canvas, 107, 49, &I_info_hover);
+        canvas_draw_icon(canvas, 93, 49, &I_info_hover);
         break;
     case 6:
+        canvas_draw_icon(canvas, 111, 49, &I_settings_hover);
+        break;
+    case 7:
         break;
     }
 
@@ -496,10 +499,7 @@ void draw_callback(Canvas* canvas, void* ctx) {
     case informing:
         draw_info_scene(canvas, app);
         break;
-    case menu:
-        draw_menu_view(canvas, app->current_y);
-        break;
-    case settings:
+    case in_settings:
         draw_settings_screen(canvas, app);
         break;
     default:

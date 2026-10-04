@@ -47,6 +47,7 @@ typedef enum {
     sleep,
     heal,
     info,
+    settings,
     COUNT_ACTION
 } ZerogotchiSelectAction;
 
@@ -63,8 +64,7 @@ typedef enum {
     waking_up,
     healing,
     informing,
-    menu,
-    settings,
+    in_settings,
     pet_selection
 } ZerogotchiAction;
 

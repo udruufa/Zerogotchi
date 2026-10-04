@@ -24,7 +24,7 @@ static void init_new_game() {
     app.game_stats.last_save_time = furi_hal_rtc_get_timestamp();
     app.game_stats.load_time = furi_hal_rtc_get_timestamp();
 
-    app.action = settings;
+    app.action = in_settings;
 }
 
 int32_t zerogotchi_app(void* p) {

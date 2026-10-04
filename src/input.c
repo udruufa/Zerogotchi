@@ -17,20 +17,17 @@ bool handle_input(ZerogotchiEvent* event, AppContext* app) {
     if(event->input.key == InputKeyBack) {
         if(app->action == waking_up) {
             app->action = sleeping;
-        } else if(app->action == settings) {
-            app->action = menu;
         } else if(app->action != NONE) {
             app->action = NONE;
+        } else if(app->animation.is_animating) {
+            ;
         } else {
-            app->action = menu;
-            app->current_y = MENU_QUIT_Y;
+            app->game_stats.last_save_time = furi_hal_rtc_get_timestamp();
+            save_game(app);
+            return true;
         }
     } else if(event->input.key == InputKeyUp) {
-        if(app->action == menu) {
-            if(app->current_y == MENU_SETTINGS_Y) {
-                app->current_y = MENU_QUIT_Y;
-            }
-        } else if(app->action == eating) {
+        if(app->action == eating) {
             if(app->current_y == FOOD_SARDINE_Y)
                 app->current_y = FOOD_ICEFISH_Y;
             else if(app->current_y == FOOD_ICEFISH_Y)
@@ -53,11 +50,7 @@ bool handle_input(ZerogotchiEvent* event, AppContext* app) {
                 app->current_y -= 12;
         }
     } else if(event->input.key == InputKeyDown) {
-        if(app->action == menu) {
-            if(app->current_y == MENU_QUIT_Y) {
-                app->current_y = MENU_SETTINGS_Y;
-            }
-        } else if(app->action == eating) {
+        if(app->action == eating) {
             if(app->current_y == FOOD_ICEFISH_Y)
                 app->current_y = FOOD_SARDINE_Y;
             else if(app->current_y == FOOD_MACKEREL_Y)
@@ -80,7 +73,7 @@ bool handle_input(ZerogotchiEvent* event, AppContext* app) {
                 app->current_y += 12;
         }
     } else if(event->input.key == InputKeyRight) {
-        if(app->action == settings) {
+        if(app->action == in_settings) {
             app->game_stats.type = (app->game_stats.type + 1) % COUNT_TYPE;
         } else if(app->action == going_to_sleep) {
             if(app->current_x == GO_TO_SLEEP_YES_X) {
@@ -89,7 +82,7 @@ bool handle_input(ZerogotchiEvent* event, AppContext* app) {
         } else if(!app->animation.is_animating && app->action == NONE)
             app->selectedAction = (app->selectedAction + 1) % COUNT_ACTION;
     } else if(event->input.key == InputKeyLeft) {
-        if(app->action == settings) {
+        if(app->action == in_settings) {
             app->game_stats.type = (app->game_stats.type - 1 + COUNT_TYPE) % COUNT_TYPE;
         } else if(app->action == going_to_sleep) {
             if(app->current_x == GO_TO_SLEEP_NO_X) {
@@ -136,6 +129,9 @@ bool handle_input(ZerogotchiEvent* event, AppContext* app) {
                         break;
                     case info:
                         app->action = informing;
+                        break;
+                    case settings:
+                        app->action = in_settings;
                         break;
                     default:
                         break;
@@ -228,17 +224,7 @@ bool handle_input(ZerogotchiEvent* event, AppContext* app) {
                 case informing:
                     app->action = NONE;
                     break;
-                case menu:
-                    if(app->current_y == MENU_QUIT_Y) {
-                        app->game_stats.last_save_time = furi_hal_rtc_get_timestamp();
-                        save_game(app);
-                        return true;
-                    }
-                    if(app->current_y == MENU_SETTINGS_Y) {
-                        app->action = settings;
-                    }
-                    break;
-                case settings:
+                case in_settings:
                     app->action = NONE;
                     if(app->current_y == SETTINGS_RESTART_Y) {
                         app->action = pet_selection;
