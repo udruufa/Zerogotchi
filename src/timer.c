@@ -75,7 +75,11 @@ void handle_offline_timer(AppContext* app) {
         app->game_stats.hunger = 0;
 
     if(app->game_stats.is_sleeping) {
-        app->game_stats.sleep_time -= seconds_passed;
+        if(seconds_passed >= app->game_stats.sleep_time) {
+            app->game_stats.sleep_time = 0;
+        } else {
+            app->game_stats.sleep_time -= seconds_passed;
+        }
     }
 }
 

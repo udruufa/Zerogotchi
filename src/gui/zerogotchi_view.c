@@ -240,7 +240,7 @@ static const Icon* sleep_frames[] = {
     &I_sleep_animation_7,
 };
 
-ZerogotchiAnimation animation;
+// ZerogotchiAnimation animation;
 
 void draw_callback(Canvas* canvas, void* ctx) {
     AppContext* app = ctx;
@@ -462,7 +462,7 @@ void draw_callback(Canvas* canvas, void* ctx) {
     case 6:
         canvas_draw_icon(canvas, 111, 49, &I_settings_hover);
         break;
-    case 7:
+    default:
         break;
     }
 

@@ -3,7 +3,7 @@
 static int32_t square_x;
 static int32_t square_y;
 
-static int32_t opponent_square;
+// static int32_t opponent_square;
 
 static uint32_t squares_count;
 
@@ -76,7 +76,7 @@ void handle_input_game_TicTacToe(ZerogotchiEvent* event, AppContext* app) {
                         }
 
                         while(squares_count) {
-                            opponent_square = rand() % 9;
+                            int32_t opponent_square = rand() % 9;
                             if(check[opponent_square / 3][opponent_square % 3][0] == 0) {
                                 check[opponent_square / 3][opponent_square % 3][0] = -1;
                                 squares_count--;

@@ -6,5 +6,5 @@
 #include "app_structs.h"
 
 bool save_file_exists(void);
-void save_game();
-void load_game();
+void save_game(AppContext* app);
+void load_game(AppContext* app);
