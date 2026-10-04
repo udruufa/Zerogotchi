@@ -1,5 +1,6 @@
 #include "zerogotchi_view.h"
 #include "settings_screen.h"
+#include "reset_screen.h"
 #include "scenes/eat_scene.h"
 #include "scenes/play_scene.h"
 #include "scenes/heal_scene.h"
@@ -500,7 +501,13 @@ void draw_callback(Canvas* canvas, void* ctx) {
         draw_info_scene(canvas, app);
         break;
     case in_settings:
-        draw_settings_screen(canvas, app);
+        draw_settings_screen(canvas, app->current_y);
+        break;
+    case reset:
+        draw_reset_screen(canvas, app->current_y);
+        break;
+    case pet_selection:
+        draw_pet_selection_screen(canvas, app);
         break;
     default:
         break;

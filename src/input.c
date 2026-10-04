@@ -1,3 +1,4 @@
+#include "init.h"
 #include "input.h"
 #include "stats.h"
 #include "storage.h"
@@ -17,6 +18,9 @@ bool handle_input(ZerogotchiEvent* event, AppContext* app) {
     if(event->input.key == InputKeyBack) {
         if(app->action == waking_up) {
             app->action = sleeping;
+        } else if(app->action == reset) {
+            app->action = in_settings;
+            app->current_y = SETTINGS_RESET_Y;
         } else if(app->action != NONE) {
             app->action = NONE;
         } else if(app->animation.is_animating) {
@@ -48,6 +52,15 @@ bool handle_input(ZerogotchiEvent* event, AppContext* app) {
                 app->current_y = MEDICINES_INJECTION_Y;
             else
                 app->current_y -= 12;
+        } else if(app->action == in_settings) {
+            if(app->current_y == SETTINGS_SOUND_Y)
+                app->current_y = SETTINGS_RESET_Y;
+            else
+                app->current_y -= 12;
+        } else if(app->action == reset) {
+            if(app->current_y == RESET_NO_Y) {
+                app->current_y = RESET_YES_Y;
+            }
         }
     } else if(event->input.key == InputKeyDown) {
         if(app->action == eating) {
@@ -71,9 +84,18 @@ bool handle_input(ZerogotchiEvent* event, AppContext* app) {
                 app->current_y = MEDICINES_VITAMINS_Y;
             else
                 app->current_y += 12;
+        } else if(app->action == in_settings) {
+            if(app->current_y == SETTINGS_RESET_Y)
+                app->current_y = SETTINGS_SOUND_Y;
+            else
+                app->current_y += 12;
+        } else if(app->action == reset) {
+            if(app->current_y == RESET_YES_Y) {
+                app->current_y = RESET_NO_Y;
+            }
         }
     } else if(event->input.key == InputKeyRight) {
-        if(app->action == in_settings) {
+        if(app->action == pet_selection) {
             app->game_stats.type = (app->game_stats.type + 1) % COUNT_TYPE;
         } else if(app->action == going_to_sleep) {
             if(app->current_x == GO_TO_SLEEP_YES_X) {
@@ -82,7 +104,7 @@ bool handle_input(ZerogotchiEvent* event, AppContext* app) {
         } else if(!app->animation.is_animating && app->action == NONE)
             app->selectedAction = (app->selectedAction + 1) % COUNT_ACTION;
     } else if(event->input.key == InputKeyLeft) {
-        if(app->action == in_settings) {
+        if(app->action == pet_selection) {
             app->game_stats.type = (app->game_stats.type - 1 + COUNT_TYPE) % COUNT_TYPE;
         } else if(app->action == going_to_sleep) {
             if(app->current_x == GO_TO_SLEEP_NO_X) {
@@ -131,6 +153,7 @@ bool handle_input(ZerogotchiEvent* event, AppContext* app) {
                         app->action = informing;
                         break;
                     case settings:
+                        app->current_y = SETTINGS_SOUND_Y;
                         app->action = in_settings;
                         break;
                     default:
@@ -210,12 +233,10 @@ bool handle_input(ZerogotchiEvent* event, AppContext* app) {
                     if(app->current_y == MEDICINES_VITAMINS_Y) {
                         increase_stat(&app->game_stats.health, 2); //health +2
                         decrease_stat(&app->game_stats.happiness, 1); //happiness -1
-                    }
-                    if(app->current_y == MEDICINES_PILLS_Y) {
+                    } else if(app->current_y == MEDICINES_PILLS_Y) {
                         increase_stat(&app->game_stats.health, 4); //health +4
                         decrease_stat(&app->game_stats.happiness, 2); //happiness -2
-                    }
-                    if(app->current_y == MEDICINES_INJECTION_Y) {
+                    } else if(app->current_y == MEDICINES_INJECTION_Y) {
                         increase_stat(&app->game_stats.health, 5); //health +5
                         decrease_stat(&app->game_stats.happiness, 4); //happiness -4
                     }
@@ -225,12 +246,25 @@ bool handle_input(ZerogotchiEvent* event, AppContext* app) {
                     app->action = NONE;
                     break;
                 case in_settings:
-                    app->action = NONE;
-                    if(app->current_y == SETTINGS_RESTART_Y) {
+                    if(app->current_y == SETTINGS_SOUND_Y) {
+                        ;
+                    } else if(app->current_y == SETTINGS_VIBRATION_Y) {
+                        ;
+                    } else if(app->current_y == SETTINGS_RESET_Y) {
+                        app->action = reset;
+                        app->current_y = RESET_YES_Y;
+                    }
+                    break;
+                case reset:
+                    if(app->current_y == RESET_YES_Y) {
                         app->action = pet_selection;
+                    } else if(app->current_y == RESET_NO_Y) {
+                        app->action = in_settings;
+                        app->current_y = SETTINGS_RESET_Y;
                     }
                     break;
                 case pet_selection:
+                    init_new_game(app);
                     app->action = NONE;
                     break;
                 default:

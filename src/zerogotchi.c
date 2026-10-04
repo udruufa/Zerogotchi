@@ -1,4 +1,5 @@
 #include "constants.h"
+#include "init.h"
 #include "storage.h"
 #include "input.h"
 #include "timer.h"
@@ -8,24 +9,6 @@
 #include "mini_games/game_Memory.h"
 
 static AppContext app;
-
-static void init_new_game() {
-    app.game_stats.health = MAX_STAT;
-    app.game_stats.happiness = MAX_STAT;
-    app.game_stats.hunger = MAX_STAT;
-    app.game_stats.exp = 0;
-    app.game_stats.lvl = 1;
-    app.game_stats.health_time = HEALTH_TIME_BABY;
-    app.game_stats.happiness_time = HAPPINESS_TIME_BABY;
-    app.game_stats.hunger_time = HUNGER_TIME_BABY;
-    app.game_stats.exp_time = EXP_TIME_BABY;
-    app.game_stats.is_sleeping = false;
-
-    app.game_stats.last_save_time = furi_hal_rtc_get_timestamp();
-    app.game_stats.load_time = furi_hal_rtc_get_timestamp();
-
-    app.action = in_settings;
-}
 
 int32_t zerogotchi_app(void* p) {
     UNUSED(p);
@@ -37,9 +20,10 @@ int32_t zerogotchi_app(void* p) {
     view_port_draw_callback_set(app.view_port, draw_callback, &app);
     view_port_input_callback_set(app.view_port, input_callback, &app);
 
-    if(!save_file_exists())
-        init_new_game();
-    else
+    if(!save_file_exists()) {
+        init_new_game(&app);
+        app.action = pet_selection;
+    } else
         load_game(&app);
     app.game_stats.load_time = furi_hal_rtc_get_timestamp();
 

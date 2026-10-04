@@ -31,8 +31,6 @@
 
 #define CHOICE_SCENE_X 48
 
-#define SETTINGS_RESTART_Y 20
-
 #define FOOD_SARDINE_Y  8
 #define FOOD_SQUID_Y    20
 #define FOOD_MACKEREL_Y 32
@@ -52,3 +50,11 @@
 #define MEDICINES_VITAMINS_Y  16
 #define MEDICINES_PILLS_Y     28
 #define MEDICINES_INJECTION_Y 40
+
+#define SETTINGS_SOUND_Y     16
+#define SETTINGS_VIBRATION_Y 28
+#define SETTINGS_RESET_Y     40
+
+#define RESET_SURE_Y 8
+#define RESET_YES_Y  36
+#define RESET_NO_Y   48

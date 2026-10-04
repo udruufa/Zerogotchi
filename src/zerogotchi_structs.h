@@ -65,6 +65,7 @@ typedef enum {
     healing,
     informing,
     in_settings,
+    reset,
     pet_selection
 } ZerogotchiAction;
 

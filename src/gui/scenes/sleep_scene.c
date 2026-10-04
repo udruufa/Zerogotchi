@@ -13,8 +13,6 @@ void draw_going_to_sleep_scene(Canvas* canvas, uint32_t current_x) {
     elements_multiline_text_aligned(
         canvas, GO_TO_SLEEP_NO_X, 56, AlignCenter, AlignCenter, "Not now");
 
-    // canvas_invert_color(canvas);
-
     if(current_x == GO_TO_SLEEP_YES_X) {
         canvas_draw_icon(canvas, 10, 50, &I_sleep_btn_hover);
         canvas_invert_color(canvas);
