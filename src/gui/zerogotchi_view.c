@@ -477,9 +477,10 @@ void draw_callback(Canvas* canvas, void* ctx) {
         draw_play_scene(canvas, app->current_y);
         break;
     case game_TicTacToe:
-        draw_game_TicTacToe(canvas);
+        draw_game_TicTacToe(canvas, app);
         break;
     case game_NoSignal:
+        update_NoSignal(app);
         draw_game_NoSignal(canvas, app);
         break;
     case game_Memory:
