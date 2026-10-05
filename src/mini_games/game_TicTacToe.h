@@ -17,4 +17,4 @@
 
 void init_new_game_TicTacToe();
 void handle_input_game_TicTacToe(ZerogotchiEvent* event, AppContext* app);
-void draw_game_TicTacToe(Canvas* canvas);
+void draw_game_TicTacToe(Canvas* canvas, AppContext* app);

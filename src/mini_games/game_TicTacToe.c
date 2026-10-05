@@ -114,11 +114,26 @@ void handle_input_game_TicTacToe(ZerogotchiEvent* event, AppContext* app) {
     }
 }
 
-void draw_game_TicTacToe(Canvas* canvas) {
+void draw_game_TicTacToe(Canvas* canvas, AppContext* app) {
     canvas_clear(canvas);
 
     canvas_draw_icon(canvas, 0, 37, &I_hands);
-    canvas_draw_icon(canvas, 0, 0, &I_dolphins_hands);
+    switch(app->game_stats.type) {
+    case(DOLPHIN):
+        canvas_draw_icon(canvas, 0, 0, &I_dolphin_hands);
+        break;
+    case(DRAGON):
+        canvas_draw_icon(canvas, 0, 0, &I_dragon_hands);
+        break;
+    case(RABBIT):
+        canvas_draw_icon(canvas, 0, 0, &I_rabbit_hands);
+        break;
+    case(TURTLE):
+        canvas_draw_icon(canvas, 0, 0, &I_turtle_hands);
+        break;
+    default:
+        break;
+    }
 
     canvas_draw_icon(canvas, 39, 7, &I_board);
 
