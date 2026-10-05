@@ -21,10 +21,10 @@ bool handle_input(ZerogotchiEvent* event, AppContext* app) {
         } else if(app->action == reset) {
             app->action = in_settings;
             app->current_y = SETTINGS_RESET_Y;
-        } else if(app->action != NONE) {
-            app->action = NONE;
         } else if(app->animation.is_animating) {
             ;
+        } else if(app->action != NONE) {
+            app->action = NONE;
         } else {
             app->game_stats.last_save_time = furi_hal_rtc_get_timestamp();
             save_game(app);
@@ -142,6 +142,8 @@ bool handle_input(ZerogotchiEvent* event, AppContext* app) {
                         app->animation.is_animating = true;
                         app->animation.frames = 8;
                         app->animation.animation_frame = 0;
+                        app->action = going_to_sleep;
+                        app->current_x = GO_TO_SLEEP_YES_X;
                         break;
                     case heal:
                         if(app->game_stats.health < MAX_STAT) {

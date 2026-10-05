@@ -7,12 +7,16 @@ void timer_callback(void* ctx) {
     ZerogotchiEvent event = {.type = EventTypeTick};
     furi_message_queue_put(app->event_queue, &event, 0);
 
+    // Idle animation
+
     if(!app->animation.is_animating) {
         app->animation.animation_frame++;
         if(app->animation.animation_frame >= app->animation.frames) {
             app->animation.animation_frame = 0;
         }
     }
+
+    // Sleep animation
 
     if(app->game_stats.is_sleeping) {
         if(app->game_stats.sleep_time > 0) {
@@ -27,6 +31,7 @@ void timer_callback(void* ctx) {
             app->action = NONE;
         }
     }
+    view_port_update(app->view_port);
 }
 
 void animation_timer_callback(void* ctx) {
@@ -36,20 +41,16 @@ void animation_timer_callback(void* ctx) {
     if(app->animation.is_animating) {
         app->animation.animation_frame++;
         if(app->animation.animation_frame >= app->animation.frames) {
+            app->animation.animation_frame = 0;
             if(app->action == game_NoSignal) {
                 app->animation.frames = 2;
-                app->animation.animation_frame = 0;
             } else {
                 app->animation.is_animating = false;
                 app->animation.frames = 4;
-                app->animation.animation_frame = 0;
-                if(app->selectedAction == sleep) {
-                    app->action = going_to_sleep;
-                    app->current_x = GO_TO_SLEEP_YES_X;
-                }
             }
         }
     }
+    view_port_update(app->view_port);
 }
 
 void handle_offline_timer(AppContext* app) {
