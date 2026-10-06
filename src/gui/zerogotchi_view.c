@@ -220,16 +220,47 @@ static const Icon* turtle_pet_frames[] = {
 
 // ANIMATIONS
 
-static const Icon* full_frames[] = {
-    &I_full_animation_0,
-    &I_full_animation_1,
-    &I_full_animation_2,
-    &I_full_animation_3,
-    &I_full_animation_4,
-    &I_full_animation_5,
-    &I_full_animation_6,
-    &I_full_animation_7,
+static const Icon* dolphin_full_frames[] = {
+    &I_dolphin_full_animation_0,
+    &I_dolphin_full_animation_1,
+    &I_dolphin_full_animation_2,
+    &I_dolphin_full_animation_3,
+    &I_dolphin_full_animation_4,
+    &I_dolphin_full_animation_5,
+    &I_dolphin_full_animation_6,
+    &I_dolphin_full_animation_7,
 };
+static const Icon* dragon_full_frames[] = {
+    &I_dragon_full_animation_0,
+    &I_dragon_full_animation_1,
+    &I_dragon_full_animation_2,
+    &I_dragon_full_animation_3,
+    &I_dragon_full_animation_4,
+    &I_dragon_full_animation_5,
+    &I_dragon_full_animation_6,
+    &I_dragon_full_animation_7,
+};
+static const Icon* rabbit_full_frames[] = {
+    &I_rabbit_full_animation_0,
+    &I_rabbit_full_animation_1,
+    &I_rabbit_full_animation_2,
+    &I_rabbit_full_animation_3,
+    &I_rabbit_full_animation_4,
+    &I_rabbit_full_animation_5,
+    &I_rabbit_full_animation_6,
+    &I_rabbit_full_animation_7,
+};
+static const Icon* turtle_full_frames[] = {
+    &I_turtle_full_animation_0,
+    &I_turtle_full_animation_1,
+    &I_turtle_full_animation_2,
+    &I_turtle_full_animation_3,
+    &I_turtle_full_animation_4,
+    &I_turtle_full_animation_5,
+    &I_turtle_full_animation_6,
+    &I_turtle_full_animation_7,
+};
+
 static const Icon* sleep_frames[] = {
     &I_sleep_animation_0,
     &I_sleep_animation_1,
@@ -519,8 +550,9 @@ void draw_callback(Canvas* canvas, void* ctx) {
     if(app->animation.is_animating) {
         switch(app->game_stats.type) {
         case(DOLPHIN):
-            if(app->selectedAction == eat)
-                canvas_draw_icon(canvas, 0, 0, full_frames[app->animation.animation_frame]);
+            if(app->selectedAction == eat || app->selectedAction == heal)
+                canvas_draw_icon(
+                    canvas, 0, 0, dolphin_full_frames[app->animation.animation_frame]);
             else if(app->selectedAction == pet)
                 canvas_draw_icon(canvas, 0, 0, dolphin_pet_frames[app->animation.animation_frame]);
             else if(app->selectedAction == sleep) {
@@ -528,8 +560,8 @@ void draw_callback(Canvas* canvas, void* ctx) {
             }
             break;
         case(DRAGON):
-            if(app->selectedAction == eat)
-                canvas_draw_icon(canvas, 0, 0, full_frames[app->animation.animation_frame]);
+            if(app->selectedAction == eat || app->selectedAction == heal)
+                canvas_draw_icon(canvas, 0, 0, dragon_full_frames[app->animation.animation_frame]);
             else if(app->selectedAction == pet)
                 canvas_draw_icon(canvas, 0, 0, dragon_pet_frames[app->animation.animation_frame]);
             else if(app->selectedAction == sleep) {
@@ -537,8 +569,8 @@ void draw_callback(Canvas* canvas, void* ctx) {
             }
             break;
         case(RABBIT):
-            if(app->selectedAction == eat)
-                canvas_draw_icon(canvas, 0, 0, full_frames[app->animation.animation_frame]);
+            if(app->selectedAction == eat || app->selectedAction == heal)
+                canvas_draw_icon(canvas, 0, 0, rabbit_full_frames[app->animation.animation_frame]);
             else if(app->selectedAction == pet)
                 canvas_draw_icon(canvas, 0, 0, rabbit_pet_frames[app->animation.animation_frame]);
             else if(app->selectedAction == sleep) {
@@ -546,8 +578,8 @@ void draw_callback(Canvas* canvas, void* ctx) {
             }
             break;
         case(TURTLE):
-            if(app->selectedAction == eat)
-                canvas_draw_icon(canvas, 0, 0, full_frames[app->animation.animation_frame]);
+            if(app->selectedAction == eat || app->selectedAction == heal)
+                canvas_draw_icon(canvas, 0, 0, turtle_full_frames[app->animation.animation_frame]);
             else if(app->selectedAction == pet)
                 canvas_draw_icon(canvas, 0, 0, turtle_pet_frames[app->animation.animation_frame]);
             else if(app->selectedAction == sleep) {

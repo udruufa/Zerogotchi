@@ -149,6 +149,10 @@ bool handle_input(ZerogotchiEvent* event, AppContext* app) {
                         if(app->game_stats.health < MAX_STAT) {
                             app->current_y = MEDICINES_VITAMINS_Y;
                             app->action = healing;
+                        } else {
+                            app->animation.is_animating = true;
+                            app->animation.frames = 8;
+                            app->animation.animation_frame = 0;
                         }
                         break;
                     case info:
@@ -249,9 +253,9 @@ bool handle_input(ZerogotchiEvent* event, AppContext* app) {
                     break;
                 case in_settings:
                     if(app->current_y == SETTINGS_SOUND_Y) {
-                        ;
+                        app->game_stats.sound_on = true;
                     } else if(app->current_y == SETTINGS_VIBRATION_Y) {
-                        ;
+                        app->game_stats.vibration_on = true;
                     } else if(app->current_y == SETTINGS_RESET_Y) {
                         app->action = reset;
                         app->current_y = RESET_YES_Y;
