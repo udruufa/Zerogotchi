@@ -1,4 +1,5 @@
 #include "game_NoSignal.h"
+#include "../feedback.h"
 
 static const Icon* dolphin_idle_frames[] = {
     &I_dolphin_idle_0,
@@ -222,6 +223,11 @@ void update_NoSignal(AppContext* app) {
        (jump_y > blocks_on_screen[0][3] ||
         (jump_speed < 0 && jump_y + 13 >= blocks_on_screen[0][3]))) {
         is_end = true;
+        if(app->game_stats.sound_on && !app->feedbacked) {
+            app->sound = END;
+            feedback_sound(app);
+            app->feedbacked = true;
+        }
     }
 }
 

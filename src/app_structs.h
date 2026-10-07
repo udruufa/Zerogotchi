@@ -20,6 +20,10 @@ typedef struct {
 
     ZerogotchiAnimation animation;
 
+    ZerogotchiSound sound;
+
     uint32_t current_y;
     uint32_t current_x;
+
+    bool feedbacked;
 } AppContext;

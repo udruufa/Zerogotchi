@@ -1,9 +1,8 @@
 #include "game_TicTacToe.h"
+#include "../feedback.h"
 
 static int32_t square_x;
 static int32_t square_y;
-
-// static int32_t opponent_square;
 
 static uint32_t squares_count;
 
@@ -109,6 +108,7 @@ void handle_input_game_TicTacToe(ZerogotchiEvent* event, AppContext* app) {
                 add_exp(3, app);
             increase_stat(&app->game_stats.happiness, 5); //happiness +5
             decrease_stat(&app->game_stats.hunger, 3); //hunger -3
+            app->feedbacked = false;
             init_new_game_TicTacToe();
         }
     }
@@ -157,13 +157,28 @@ void draw_game_TicTacToe(Canvas* canvas, AppContext* app) {
         canvas_clear(canvas);
         canvas_set_font(canvas, FontPrimary);
         elements_multiline_text_aligned(canvas, 64, 32, AlignCenter, AlignCenter, "YOU WIN!");
+        if(app->game_stats.sound_on && !app->feedbacked) {
+            app->sound = WIN;
+            feedback_sound(app);
+            app->feedbacked = true;
+        }
     } else if(is_lose) {
         canvas_clear(canvas);
         canvas_set_font(canvas, FontPrimary);
         elements_multiline_text_aligned(canvas, 64, 32, AlignCenter, AlignCenter, "YOU LOSE:(");
+        if(app->game_stats.sound_on && !app->feedbacked) {
+            app->sound = LOSS;
+            feedback_sound(app);
+            app->feedbacked = true;
+        }
     } else if(!squares_count) {
         canvas_clear(canvas);
         canvas_set_font(canvas, FontPrimary);
         elements_multiline_text_aligned(canvas, 64, 32, AlignCenter, AlignCenter, "THE DRAW.");
+        if(app->game_stats.sound_on && !app->feedbacked) {
+            app->sound = END;
+            feedback_sound(app);
+            app->feedbacked = true;
+        }
     }
 }

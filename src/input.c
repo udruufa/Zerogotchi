@@ -2,6 +2,7 @@
 #include "input.h"
 #include "stats.h"
 #include "storage.h"
+#include "feedback.h"
 #include "mini_games/game_TicTacToe.h"
 #include "mini_games/game_NoSignal.h"
 #include "mini_games/game_Memory.h"
@@ -125,6 +126,9 @@ bool handle_input(ZerogotchiEvent* event, AppContext* app) {
                             app->animation.is_animating = true;
                             app->animation.frames = 8;
                             app->animation.animation_frame = 0;
+                            if(app->game_stats.vibration_on) {
+                                feedback_vibration(app);
+                            }
                         }
                         break;
                     case pet:
@@ -153,6 +157,9 @@ bool handle_input(ZerogotchiEvent* event, AppContext* app) {
                             app->animation.is_animating = true;
                             app->animation.frames = 8;
                             app->animation.animation_frame = 0;
+                            if(app->game_stats.vibration_on) {
+                                feedback_vibration(app);
+                            }
                         }
                         break;
                     case info:
@@ -253,9 +260,17 @@ bool handle_input(ZerogotchiEvent* event, AppContext* app) {
                     break;
                 case in_settings:
                     if(app->current_y == SETTINGS_SOUND_Y) {
-                        app->game_stats.sound_on = true;
+                        if(app->game_stats.sound_on) {
+                            app->game_stats.sound_on = false;
+                        } else {
+                            app->game_stats.sound_on = true;
+                        }
                     } else if(app->current_y == SETTINGS_VIBRATION_Y) {
-                        app->game_stats.vibration_on = true;
+                        if(app->game_stats.vibration_on) {
+                            app->game_stats.vibration_on = false;
+                        } else {
+                            app->game_stats.vibration_on = true;
+                        }
                     } else if(app->current_y == SETTINGS_RESET_Y) {
                         app->action = reset;
                         app->current_y = RESET_YES_Y;

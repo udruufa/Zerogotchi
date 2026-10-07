@@ -38,6 +38,9 @@ typedef struct {
 
     uint32_t last_save_time;
     uint32_t load_time;
+
+    bool vibration_on;
+    bool sound_on;
 } ZerogotchiStats;
 
 typedef enum {
@@ -74,6 +77,12 @@ typedef struct {
     uint32_t frames;
     uint32_t animation_frame;
 } ZerogotchiAnimation;
+
+typedef enum {
+    WIN,
+    LOSS,
+    END,
+} ZerogotchiSound;
 
 typedef enum {
     EventTypeTick,

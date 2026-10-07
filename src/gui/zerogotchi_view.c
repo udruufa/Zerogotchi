@@ -533,7 +533,7 @@ void draw_callback(Canvas* canvas, void* ctx) {
         draw_info_scene(canvas, app);
         break;
     case in_settings:
-        draw_settings_screen(canvas, app->current_y);
+        draw_settings_screen(canvas, app);
         break;
     case reset:
         draw_reset_screen(canvas, app->current_y);
