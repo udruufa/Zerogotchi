@@ -288,37 +288,52 @@ void draw_callback(Canvas* canvas, void* ctx) {
         case(DOLPHIN):
             switch(app->game_stats.stage) {
             case(BABY):
-                if(app->game_stats.is_sleeping)
-                    canvas_draw_icon(
-                        canvas,
-                        48,
-                        20,
-                        dolphin_baby_sleeping_frames[app->animation.animation_frame]);
-                else
-                    canvas_draw_icon(
-                        canvas, 48, 20, dolphin_baby_frames[app->animation.animation_frame]);
+                if(!app->game_stats.health && !app->game_stats.happiness &&
+                   !app->game_stats.hunger) {
+                    canvas_draw_icon(canvas, 48, 20, &I_dolphin_baby_coma);
+                } else {
+                    if(app->game_stats.is_sleeping)
+                        canvas_draw_icon(
+                            canvas,
+                            48,
+                            20,
+                            dolphin_baby_sleeping_frames[app->animation.animation_frame]);
+                    else
+                        canvas_draw_icon(
+                            canvas, 48, 20, dolphin_baby_frames[app->animation.animation_frame]);
+                }
                 break;
             case(TEEN):
-                if(app->game_stats.is_sleeping)
-                    canvas_draw_icon(
-                        canvas,
-                        48,
-                        13,
-                        dolphin_teen_sleeping_frames[app->animation.animation_frame]);
-                else
-                    canvas_draw_icon(
-                        canvas, 48, 13, dolphin_teen_frames[app->animation.animation_frame]);
+                if(!app->game_stats.health && !app->game_stats.happiness &&
+                   !app->game_stats.hunger) {
+                    canvas_draw_icon(canvas, 48, 13, &I_dolphin_teen_coma);
+                } else {
+                    if(app->game_stats.is_sleeping)
+                        canvas_draw_icon(
+                            canvas,
+                            48,
+                            13,
+                            dolphin_teen_sleeping_frames[app->animation.animation_frame]);
+                    else
+                        canvas_draw_icon(
+                            canvas, 48, 13, dolphin_teen_frames[app->animation.animation_frame]);
+                }
                 break;
             case(ADULT):
-                if(app->game_stats.is_sleeping)
-                    canvas_draw_icon(
-                        canvas,
-                        42,
-                        8,
-                        dolphin_adult_sleeping_frames[app->animation.animation_frame]);
-                else
-                    canvas_draw_icon(
-                        canvas, 42, 8, dolphin_adult_frames[app->animation.animation_frame]);
+                if(!app->game_stats.health && !app->game_stats.happiness &&
+                   !app->game_stats.hunger) {
+                    canvas_draw_icon(canvas, 42, 8, &I_dolphin_adult_coma);
+                } else {
+                    if(app->game_stats.is_sleeping)
+                        canvas_draw_icon(
+                            canvas,
+                            42,
+                            8,
+                            dolphin_adult_sleeping_frames[app->animation.animation_frame]);
+                    else
+                        canvas_draw_icon(
+                            canvas, 42, 8, dolphin_adult_frames[app->animation.animation_frame]);
+                }
                 break;
             default:
                 break;
@@ -327,37 +342,52 @@ void draw_callback(Canvas* canvas, void* ctx) {
         case(DRAGON):
             switch(app->game_stats.stage) {
             case(BABY):
-                if(app->game_stats.is_sleeping)
-                    canvas_draw_icon(
-                        canvas,
-                        50,
-                        18,
-                        dragon_baby_sleeping_frames[app->animation.animation_frame]);
-                else
-                    canvas_draw_icon(
-                        canvas, 50, 18, dragon_baby_frames[app->animation.animation_frame]);
+                if(!app->game_stats.health && !app->game_stats.happiness &&
+                   !app->game_stats.hunger) {
+                    canvas_draw_icon(canvas, 48, 20, &I_dragon_baby_coma);
+                } else {
+                    if(app->game_stats.is_sleeping)
+                        canvas_draw_icon(
+                            canvas,
+                            50,
+                            18,
+                            dragon_baby_sleeping_frames[app->animation.animation_frame]);
+                    else
+                        canvas_draw_icon(
+                            canvas, 50, 18, dragon_baby_frames[app->animation.animation_frame]);
+                }
                 break;
             case(TEEN):
-                if(app->game_stats.is_sleeping)
-                    canvas_draw_icon(
-                        canvas,
-                        46,
-                        16,
-                        dragon_teen_sleeping_frames[app->animation.animation_frame]);
-                else
-                    canvas_draw_icon(
-                        canvas, 46, 16, dragon_teen_frames[app->animation.animation_frame]);
+                if(!app->game_stats.health && !app->game_stats.happiness &&
+                   !app->game_stats.hunger) {
+                    canvas_draw_icon(canvas, 48, 20, &I_dragon_teen_coma);
+                } else {
+                    if(app->game_stats.is_sleeping)
+                        canvas_draw_icon(
+                            canvas,
+                            46,
+                            16,
+                            dragon_teen_sleeping_frames[app->animation.animation_frame]);
+                    else
+                        canvas_draw_icon(
+                            canvas, 46, 16, dragon_teen_frames[app->animation.animation_frame]);
+                }
                 break;
             case(ADULT):
-                if(app->game_stats.is_sleeping)
-                    canvas_draw_icon(
-                        canvas,
-                        40,
-                        8,
-                        dragon_adult_sleeping_frames[app->animation.animation_frame]);
-                else
-                    canvas_draw_icon(
-                        canvas, 40, 8, dragon_adult_frames[app->animation.animation_frame]);
+                if(!app->game_stats.health && !app->game_stats.happiness &&
+                   !app->game_stats.hunger) {
+                    canvas_draw_icon(canvas, 48, 20, &I_dragon_adult_coma);
+                } else {
+                    if(app->game_stats.is_sleeping)
+                        canvas_draw_icon(
+                            canvas,
+                            40,
+                            8,
+                            dragon_adult_sleeping_frames[app->animation.animation_frame]);
+                    else
+                        canvas_draw_icon(
+                            canvas, 40, 8, dragon_adult_frames[app->animation.animation_frame]);
+                }
                 break;
             default:
                 break;
@@ -366,37 +396,53 @@ void draw_callback(Canvas* canvas, void* ctx) {
         case(RABBIT):
             switch(app->game_stats.stage) {
             case(BABY):
-                if(app->game_stats.is_sleeping)
-                    canvas_draw_icon(
-                        canvas,
-                        52,
-                        20,
-                        rabbit_baby_sleeping_frames[app->animation.animation_frame]);
-                else
-                    canvas_draw_icon(
-                        canvas, 52, 20, rabbit_baby_frames[app->animation.animation_frame]);
+                if(!app->game_stats.health && !app->game_stats.happiness &&
+                   !app->game_stats.hunger) {
+                    canvas_draw_icon(canvas, 48, 20, &I_rabbit_baby_coma);
+                } else {
+                    if(app->game_stats.is_sleeping)
+                        canvas_draw_icon(
+                            canvas,
+                            52,
+                            20,
+                            rabbit_baby_sleeping_frames[app->animation.animation_frame]);
+                    else
+                        canvas_draw_icon(
+                            canvas, 52, 20, rabbit_baby_frames[app->animation.animation_frame]);
+                }
                 break;
             case(TEEN):
-                if(app->game_stats.is_sleeping)
-                    canvas_draw_icon(
-                        canvas,
-                        50,
-                        14,
-                        rabbit_teen_sleeping_frames[app->animation.animation_frame]);
-                else
-                    canvas_draw_icon(
-                        canvas, 50, 14, rabbit_teen_frames[app->animation.animation_frame]);
+                if(!app->game_stats.health && !app->game_stats.happiness &&
+                   !app->game_stats.hunger) {
+                    canvas_draw_icon(canvas, 48, 20, &I_rabbit_teen_coma);
+                } else {
+                    if(app->game_stats.is_sleeping)
+                        canvas_draw_icon(
+                            canvas,
+                            50,
+                            14,
+                            rabbit_teen_sleeping_frames[app->animation.animation_frame]);
+                    else
+                        canvas_draw_icon(
+                            canvas, 50, 14, rabbit_teen_frames[app->animation.animation_frame]);
+                }
                 break;
             case(ADULT):
-                if(app->game_stats.is_sleeping)
-                    canvas_draw_icon(
-                        canvas,
-                        46,
-                        10,
-                        rabbit_adult_sleeping_frames[app->animation.animation_frame]);
-                else
-                    canvas_draw_icon(
-                        canvas, 46, 10, rabbit_adult_frames[app->animation.animation_frame]);
+
+                if(!app->game_stats.health && !app->game_stats.happiness &&
+                   !app->game_stats.hunger) {
+                    canvas_draw_icon(canvas, 48, 20, &I_rabbit_adult_coma);
+                } else {
+                    if(app->game_stats.is_sleeping)
+                        canvas_draw_icon(
+                            canvas,
+                            46,
+                            10,
+                            rabbit_adult_sleeping_frames[app->animation.animation_frame]);
+                    else
+                        canvas_draw_icon(
+                            canvas, 46, 10, rabbit_adult_frames[app->animation.animation_frame]);
+                }
                 break;
             default:
                 break;
@@ -405,37 +451,52 @@ void draw_callback(Canvas* canvas, void* ctx) {
         case(TURTLE):
             switch(app->game_stats.stage) {
             case(BABY):
-                if(app->game_stats.is_sleeping)
-                    canvas_draw_icon(
-                        canvas,
-                        52,
-                        20,
-                        turtle_baby_sleeping_frames[app->animation.animation_frame]);
-                else
-                    canvas_draw_icon(
-                        canvas, 50, 20, turtle_baby_frames[app->animation.animation_frame]);
+                if(!app->game_stats.health && !app->game_stats.happiness &&
+                   !app->game_stats.hunger) {
+                    canvas_draw_icon(canvas, 48, 20, &I_turtle_baby_coma);
+                } else {
+                    if(app->game_stats.is_sleeping)
+                        canvas_draw_icon(
+                            canvas,
+                            52,
+                            20,
+                            turtle_baby_sleeping_frames[app->animation.animation_frame]);
+                    else
+                        canvas_draw_icon(
+                            canvas, 50, 20, turtle_baby_frames[app->animation.animation_frame]);
+                }
                 break;
             case(TEEN):
-                if(app->game_stats.is_sleeping)
-                    canvas_draw_icon(
-                        canvas,
-                        48,
-                        22,
-                        turtle_teen_sleeping_frames[app->animation.animation_frame]);
-                else
-                    canvas_draw_icon(
-                        canvas, 49, 22, turtle_teen_frames[app->animation.animation_frame]);
+                if(!app->game_stats.health && !app->game_stats.happiness &&
+                   !app->game_stats.hunger) {
+                    canvas_draw_icon(canvas, 48, 20, &I_turtle_teen_coma);
+                } else {
+                    if(app->game_stats.is_sleeping)
+                        canvas_draw_icon(
+                            canvas,
+                            48,
+                            22,
+                            turtle_teen_sleeping_frames[app->animation.animation_frame]);
+                    else
+                        canvas_draw_icon(
+                            canvas, 49, 22, turtle_teen_frames[app->animation.animation_frame]);
+                }
                 break;
             case(ADULT):
-                if(app->game_stats.is_sleeping)
-                    canvas_draw_icon(
-                        canvas,
-                        40,
-                        15,
-                        turtle_adult_sleeping_frames[app->animation.animation_frame]);
-                else
-                    canvas_draw_icon(
-                        canvas, 40, 15, turtle_adult_frames[app->animation.animation_frame]);
+                if(!app->game_stats.health && !app->game_stats.happiness &&
+                   !app->game_stats.hunger) {
+                    canvas_draw_icon(canvas, 48, 20, &I_turtle_adult_coma);
+                } else {
+                    if(app->game_stats.is_sleeping)
+                        canvas_draw_icon(
+                            canvas,
+                            40,
+                            15,
+                            turtle_adult_sleeping_frames[app->animation.animation_frame]);
+                    else
+                        canvas_draw_icon(
+                            canvas, 40, 15, turtle_adult_frames[app->animation.animation_frame]);
+                }
                 break;
             default:
                 break;
@@ -550,7 +611,9 @@ void draw_callback(Canvas* canvas, void* ctx) {
     if(app->animation.is_animating) {
         switch(app->game_stats.type) {
         case(DOLPHIN):
-            if(app->selectedAction == eat || app->selectedAction == heal)
+            if(app->selectedAction == eat || app->selectedAction == heal ||
+               ((app->selectedAction == pet || app->selectedAction == play) &&
+                (!app->game_stats.health && !app->game_stats.happiness && !app->game_stats.hunger)))
                 canvas_draw_icon(
                     canvas, 0, 0, dolphin_full_frames[app->animation.animation_frame]);
             else if(app->selectedAction == pet)
@@ -560,7 +623,9 @@ void draw_callback(Canvas* canvas, void* ctx) {
             }
             break;
         case(DRAGON):
-            if(app->selectedAction == eat || app->selectedAction == heal)
+            if(app->selectedAction == eat || app->selectedAction == heal ||
+               ((app->selectedAction == pet || app->selectedAction == play) &&
+                (!app->game_stats.health && !app->game_stats.happiness && !app->game_stats.hunger)))
                 canvas_draw_icon(canvas, 0, 0, dragon_full_frames[app->animation.animation_frame]);
             else if(app->selectedAction == pet)
                 canvas_draw_icon(canvas, 0, 0, dragon_pet_frames[app->animation.animation_frame]);
@@ -569,7 +634,9 @@ void draw_callback(Canvas* canvas, void* ctx) {
             }
             break;
         case(RABBIT):
-            if(app->selectedAction == eat || app->selectedAction == heal)
+            if(app->selectedAction == eat || app->selectedAction == heal ||
+               ((app->selectedAction == pet || app->selectedAction == play) &&
+                (!app->game_stats.health && !app->game_stats.happiness && !app->game_stats.hunger)))
                 canvas_draw_icon(canvas, 0, 0, rabbit_full_frames[app->animation.animation_frame]);
             else if(app->selectedAction == pet)
                 canvas_draw_icon(canvas, 0, 0, rabbit_pet_frames[app->animation.animation_frame]);
@@ -578,7 +645,9 @@ void draw_callback(Canvas* canvas, void* ctx) {
             }
             break;
         case(TURTLE):
-            if(app->selectedAction == eat || app->selectedAction == heal)
+            if(app->selectedAction == eat || app->selectedAction == heal ||
+               ((app->selectedAction == pet || app->selectedAction == play) &&
+                (!app->game_stats.health && !app->game_stats.happiness && !app->game_stats.hunger)))
                 canvas_draw_icon(canvas, 0, 0, turtle_full_frames[app->animation.animation_frame]);
             else if(app->selectedAction == pet)
                 canvas_draw_icon(canvas, 0, 0, turtle_pet_frames[app->animation.animation_frame]);

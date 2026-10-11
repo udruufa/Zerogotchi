@@ -132,15 +132,32 @@ bool handle_input(ZerogotchiEvent* event, AppContext* app) {
                         }
                         break;
                     case pet:
-                        add_exp(1, app);
-                        increase_stat(&app->game_stats.happiness, 1); //happiness +1
+                        if(!app->game_stats.health && !app->game_stats.happiness &&
+                           !app->game_stats.hunger) {
+                            if(app->game_stats.vibration_on) {
+                                feedback_vibration(app);
+                            }
+                        } else {
+                            add_exp(1, app);
+                            increase_stat(&app->game_stats.happiness, 1); //happiness +1
+                        }
                         app->animation.is_animating = true;
                         app->animation.frames = 8;
                         app->animation.animation_frame = 0;
                         break;
                     case play:
-                        app->current_y = GAMES_TICTACTOE_Y;
-                        app->action = playing;
+                        if(!app->game_stats.health && !app->game_stats.happiness &&
+                           !app->game_stats.hunger) {
+                            app->animation.is_animating = true;
+                            app->animation.frames = 8;
+                            app->animation.animation_frame = 0;
+                            if(app->game_stats.vibration_on) {
+                                feedback_vibration(app);
+                            }
+                        } else {
+                            app->current_y = GAMES_TICTACTOE_Y;
+                            app->action = playing;
+                        }
                         break;
                     case sleep:
                         app->animation.is_animating = true;

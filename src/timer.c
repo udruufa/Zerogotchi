@@ -9,7 +9,8 @@ void timer_callback(void* ctx) {
 
     // Idle animation
 
-    if(!app->animation.is_animating) {
+    if(!app->animation.is_animating ||
+       (!app->game_stats.health && !app->game_stats.happiness && !app->game_stats.hunger)) {
         app->animation.animation_frame++;
         if(app->animation.animation_frame >= app->animation.frames) {
             app->animation.animation_frame = 0;
@@ -109,10 +110,36 @@ void handle_timer(AppContext* app) {
     }
 
     if(app->game_stats.happiness == 0) {
-        app->game_stats.health_time = HEALTH_TIME_BABY_0_HAPPINESS;
+        switch(app->game_stats.stage) {
+        case BABY:
+            app->game_stats.health_time = HEALTH_TIME_BABY_0_HAPPINESS;
+            break;
+        case TEEN:
+            app->game_stats.health_time = HEALTH_TIME_TEEN_0_HAPPINESS;
+            break;
+        case ADULT:
+            app->game_stats.health_time = HEALTH_TIME_ADULT_0_HAPPINESS;
+            break;
+        default:
+            break;
+        }
     }
     if(app->game_stats.hunger == 0) {
-        app->game_stats.health_time = HEALTH_TIME_BABY_0_HUNGER;
-        app->game_stats.happiness_time = HAPPINESS_TIME_BABY_0_HUNGER;
+        switch(app->game_stats.stage) {
+        case BABY:
+            app->game_stats.health_time = HEALTH_TIME_BABY_0_HUNGER;
+            app->game_stats.happiness_time = HAPPINESS_TIME_BABY_0_HUNGER;
+            break;
+        case TEEN:
+            app->game_stats.health_time = HEALTH_TIME_TEEN_0_HUNGER;
+            app->game_stats.happiness_time = HAPPINESS_TIME_TEEN_0_HUNGER;
+            break;
+        case ADULT:
+            app->game_stats.health_time = HEALTH_TIME_ADULT_0_HUNGER;
+            app->game_stats.happiness_time = HAPPINESS_TIME_ADULT_0_HUNGER;
+            break;
+        default:
+            break;
+        }
     }
 }

@@ -6,7 +6,9 @@ void draw_info_scene(Canvas* canvas, AppContext* app) {
 
     switch(app->game_stats.type) {
     case(DOLPHIN):
-        if(app->game_stats.is_sleeping)
+        if(!app->game_stats.health && !app->game_stats.happiness && !app->game_stats.hunger)
+            canvas_draw_icon(canvas, ASSET_X, ASSET_Y, &I_dolphin_coma);
+        else if(app->game_stats.is_sleeping)
             canvas_draw_icon(canvas, ASSET_X, ASSET_Y, &I_dolphin_sleep);
         else if(app->game_stats.health < 10)
             canvas_draw_icon(canvas, ASSET_X, ASSET_Y, &I_dolphin_ill);
@@ -16,7 +18,9 @@ void draw_info_scene(Canvas* canvas, AppContext* app) {
             canvas_draw_icon(canvas, ASSET_X, ASSET_Y, &I_dolphin_happy);
         break;
     case(DRAGON):
-        if(app->game_stats.is_sleeping)
+        if(!app->game_stats.health && !app->game_stats.happiness && !app->game_stats.hunger)
+            canvas_draw_icon(canvas, ASSET_X, ASSET_Y, &I_dragon_coma);
+        else if(app->game_stats.is_sleeping)
             canvas_draw_icon(canvas, ASSET_X, ASSET_Y, &I_dragon_sleep);
         else if(app->game_stats.health < 10)
             canvas_draw_icon(canvas, ASSET_X, ASSET_Y, &I_dragon_ill);
@@ -26,7 +30,9 @@ void draw_info_scene(Canvas* canvas, AppContext* app) {
             canvas_draw_icon(canvas, ASSET_X, ASSET_Y, &I_dragon_happy);
         break;
     case(RABBIT):
-        if(app->game_stats.is_sleeping)
+        if(!app->game_stats.health && !app->game_stats.happiness && !app->game_stats.hunger)
+            canvas_draw_icon(canvas, ASSET_X, ASSET_Y, &I_rabbit_coma);
+        else if(app->game_stats.is_sleeping)
             canvas_draw_icon(canvas, ASSET_X, ASSET_Y, &I_rabbit_sleep);
         else if(app->game_stats.health < 10)
             canvas_draw_icon(canvas, ASSET_X, ASSET_Y, &I_rabbit_ill);
@@ -36,7 +42,9 @@ void draw_info_scene(Canvas* canvas, AppContext* app) {
             canvas_draw_icon(canvas, ASSET_X, ASSET_Y, &I_rabbit_happy);
         break;
     case(TURTLE):
-        if(app->game_stats.is_sleeping)
+        if(!app->game_stats.health && !app->game_stats.happiness && !app->game_stats.hunger)
+            canvas_draw_icon(canvas, ASSET_X, ASSET_Y, &I_turtle_coma);
+        else if(app->game_stats.is_sleeping)
             canvas_draw_icon(canvas, ASSET_X, ASSET_Y, &I_turtle_sleep);
         else if(app->game_stats.health < 10)
             canvas_draw_icon(canvas, ASSET_X, ASSET_Y, &I_turtle_ill);
