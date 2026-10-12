@@ -52,7 +52,22 @@ void draw_sleep_scene(Canvas* canvas, AppContext* app) {
 
     canvas_clear(canvas);
 
-    canvas_draw_icon(canvas, 0, 0, &I_sleep_scene);
+    switch(app->game_stats.type) {
+    case(DOLPHIN):
+        canvas_draw_icon(canvas, 0, 0, &I_dolphin_sleep_scene);
+        break;
+    case(DRAGON):
+        canvas_draw_icon(canvas, 0, 0, &I_dragon_sleep_scene);
+        break;
+    case(RABBIT):
+        canvas_draw_icon(canvas, 0, 0, &I_rabbit_sleep_scene);
+        break;
+    case(TURTLE):
+        canvas_draw_icon(canvas, 0, 0, &I_turtle_sleep_scene);
+        break;
+    default:
+        break;
+    }
 
     canvas_set_font(canvas, FontSecondary);
 
