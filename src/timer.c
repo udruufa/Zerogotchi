@@ -1,4 +1,7 @@
 #include "timer.h"
+#include "init.h"
+
+#include <datetime/datetime.h>
 
 void timer_callback(void* ctx) {
     furi_assert(ctx);
@@ -7,13 +10,20 @@ void timer_callback(void* ctx) {
     ZerogotchiEvent event = {.type = EventTypeTick};
     furi_message_queue_put(app->event_queue, &event, 0);
 
-    // Idle animation
+    DateTime datetime;
+    furi_hal_rtc_get_datetime(&datetime);
+    if(!datetime.hour && !datetime.minute && !datetime.second) {
+        app->game_stats.eat_count = 0;
+        app->game_stats.heal_count = 0;
+    }
 
-    if(!app->animation.is_animating ||
-       (!app->game_stats.health && !app->game_stats.happiness && !app->game_stats.hunger)) {
-        app->animation.animation_frame++;
-        if(app->animation.animation_frame >= app->animation.frames) {
-            app->animation.animation_frame = 0;
+    // Idle animation
+    if(!(!app->game_stats.health && !app->game_stats.happiness && !app->game_stats.hunger)) {
+        if(!app->animation.is_animating) {
+            app->animation.animation_frame++;
+            if(app->animation.animation_frame >= app->animation.frames) {
+                app->animation.animation_frame = 0;
+            }
         }
     }
 
@@ -30,6 +40,7 @@ void timer_callback(void* ctx) {
             app->animation.is_animating = false;
             app->game_stats.is_sleeping = false;
             app->action = NONE;
+            app->game_stats.woke_up = furi_hal_rtc_get_timestamp();
         }
     }
     view_port_update(app->view_port);
@@ -48,6 +59,9 @@ void animation_timer_callback(void* ctx) {
             } else {
                 app->animation.is_animating = false;
                 app->animation.frames = 4;
+                if(app->action == init) {
+                    init_new_game(app);
+                }
             }
         }
     }
@@ -137,6 +151,27 @@ void handle_timer(AppContext* app) {
         case ADULT:
             app->game_stats.health_time = HEALTH_TIME_ADULT_0_HUNGER;
             app->game_stats.happiness_time = HAPPINESS_TIME_ADULT_0_HUNGER;
+            break;
+        default:
+            break;
+        }
+    }
+    if(now - app->game_stats.woke_up > 72000) {
+        switch(app->game_stats.stage) {
+        case(BABY):
+            app->game_stats.health_time = HEALTH_TIME_BABY_NO_SLEEP;
+            app->game_stats.happiness_time = HAPPINESS_TIME_BABY_NO_SLEEP;
+            app->game_stats.hunger_time = HUNGER_TIME_BABY_NO_SLEEP;
+            break;
+        case(TEEN):
+            app->game_stats.health_time = HEALTH_TIME_TEEN_NO_SLEEP;
+            app->game_stats.happiness_time = HAPPINESS_TIME_TEEN_NO_SLEEP;
+            app->game_stats.hunger_time = HUNGER_TIME_TEEN_NO_SLEEP;
+            break;
+        case(ADULT):
+            app->game_stats.health_time = HEALTH_TIME_ADULT_NO_SLEEP;
+            app->game_stats.happiness_time = HAPPINESS_TIME_ADULT_NO_SLEEP;
+            app->game_stats.hunger_time = HUNGER_TIME_ADULT_NO_SLEEP;
             break;
         default:
             break;

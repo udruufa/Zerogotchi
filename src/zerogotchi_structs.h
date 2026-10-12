@@ -35,12 +35,16 @@ typedef struct {
 
     bool is_sleeping;
     uint32_t sleep_time;
+    uint32_t woke_up;
 
     uint32_t last_save_time;
     uint32_t load_time;
 
-    bool vibration_on;
+    uint8_t eat_count;
+    uint8_t heal_count;
+
     bool sound_on;
+    bool vibration_on;
 } ZerogotchiStats;
 
 typedef enum {
@@ -56,6 +60,7 @@ typedef enum {
 
 typedef enum {
     NONE,
+    init,
     eating,
     petting,
     playing,

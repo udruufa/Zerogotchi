@@ -11,7 +11,10 @@ void init_new_game(AppContext* app) {
     app->game_stats.hunger_time = HUNGER_TIME_BABY;
     app->game_stats.exp_time = EXP_TIME_BABY;
     app->game_stats.is_sleeping = false;
+    app->game_stats.woke_up = furi_hal_rtc_get_timestamp();
 
     app->game_stats.last_save_time = furi_hal_rtc_get_timestamp();
     app->game_stats.load_time = furi_hal_rtc_get_timestamp();
+
+    app->action = NONE;
 }
