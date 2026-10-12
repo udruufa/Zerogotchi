@@ -16,6 +16,8 @@ static int32_t check[3][3][3];
 static bool is_win;
 static bool is_lose;
 
+static bool computer_checked;
+
 void init_new_game_TicTacToe() {
     square_x = X1;
     square_y = Y1;
@@ -25,6 +27,21 @@ void init_new_game_TicTacToe() {
 
     is_win = false;
     is_lose = false;
+
+    computer_checked = false;
+}
+
+void compiter_input(uint32_t row, uint32_t column) {
+    check[row][column][0] = -1;
+
+    if((check[row][0][0] == -1 && check[row][1][0] == -1 && check[row][2][0] == -1) ||
+       (check[0][column][0] == -1 && check[1][column][0] == -1 && check[2][column][0] == -1) ||
+       (check[0][0][0] == -1 && check[1][1][0] == -1 && check[2][2][0] == -1) ||
+       (check[0][2][0] == -1 && check[1][1][0] == -1 && check[2][0][0] == -1))
+        is_lose = true;
+
+    squares_count--;
+    computer_checked = true;
 }
 
 void handle_input_game_TicTacToe(ZerogotchiEvent* event, AppContext* app) {
@@ -74,31 +91,97 @@ void handle_input_game_TicTacToe(ZerogotchiEvent* event, AppContext* app) {
                             is_win = true;
                         }
 
-                        while(squares_count) {
-                            int32_t opponent_square = rand() % 9;
-                            if(check[opponent_square / 3][opponent_square % 3][0] == 0) {
-                                check[opponent_square / 3][opponent_square % 3][0] = -1;
-                                squares_count--;
-
-                                if((check[opponent_square / 3][0][0] == -1 &&
-                                    check[opponent_square / 3][1][0] == -1 &&
-                                    check[opponent_square / 3][2][0] == -1) ||
-                                   (check[0][opponent_square % 3][0] == -1 &&
-                                    check[1][opponent_square % 3][0] == -1 &&
-                                    check[2][opponent_square % 3][0] == -1) ||
-                                   (check[0][0][0] == -1 && check[1][1][0] == -1 &&
-                                    check[2][2][0] == -1) ||
-                                   (check[0][2][0] == -1 && check[1][1][0] == -1 &&
-                                    check[2][0][0] == -1))
-                                    is_lose = true;
-
-                                break;
+                        while(!computer_checked) {
+                            for(uint8_t i = 0; i < 3; i++) {
+                                if((check[i][0][0] + check[i][1][0] + check[i][2][0]) == -2) {
+                                    for(uint8_t j = 0; j < 3; j++) {
+                                        if(check[i][j][0] == 0) {
+                                            compiter_input(i, j);
+                                            break;
+                                        }
+                                    }
+                                } else if((check[0][i][0] + check[1][i][0] + check[2][i][0]) == -2) {
+                                    for(uint8_t j = 0; j < 3; j++) {
+                                        if(check[j][i][0] == 0) {
+                                            compiter_input(j, i);
+                                            break;
+                                        }
+                                    }
+                                } else if((check[0][0][0] + check[1][1][0] + check[2][2][0]) == -2) {
+                                    for(uint8_t k = 0; k < 3; k++) {
+                                        if(check[k][k][0] == 0) {
+                                            compiter_input(k, k);
+                                            break;
+                                        }
+                                    }
+                                } else if((check[0][2][0] + check[1][1][0] + check[2][0][0]) == -2) {
+                                    uint8_t l = 2;
+                                    for(uint8_t k = 0; k < 3; k++) {
+                                        if(check[k][l][0] == 0) {
+                                            compiter_input(k, l);
+                                            break;
+                                        }
+                                        l--;
+                                    }
+                                }
+                                if(computer_checked) break;
                             }
+                            for(uint8_t i = 0; i < 3; i++) {
+                                if((check[i][0][0] + check[i][1][0] + check[i][2][0]) == 2) {
+                                    for(uint8_t j = 0; j < 3; j++) {
+                                        if(check[i][j][0] == 0) {
+                                            compiter_input(i, j);
+                                            break;
+                                        }
+                                    }
+                                } else if((check[0][i][0] + check[1][i][0] + check[2][i][0]) == 2) {
+                                    for(uint8_t j = 0; j < 3; j++) {
+                                        if(check[j][i][0] == 0) {
+                                            compiter_input(j, i);
+                                            break;
+                                        }
+                                    }
+                                } else if((check[0][0][0] + check[1][1][0] + check[2][2][0]) == 2) {
+                                    for(uint8_t k = 0; k < 3; k++) {
+                                        if(check[k][k][0] == 0) {
+                                            compiter_input(k, k);
+                                            break;
+                                        }
+                                    }
+                                } else if((check[0][2][0] + check[1][1][0] + check[2][0][0]) == 2) {
+                                    uint8_t l = 2;
+                                    for(uint8_t k = 0; k < 3; k++) {
+                                        if(check[k][l][0] == 0) {
+                                            compiter_input(k, l);
+                                            break;
+                                        }
+                                        l--;
+                                    }
+                                }
+                                if(computer_checked) break;
+                            }
+                            if(!computer_checked) {
+                                if(check[1][1][0] == 0) {
+                                    compiter_input(1, 1);
+                                } else {
+                                    while(squares_count) {
+                                        int32_t opponent_square = rand() % 9;
+                                        if(check[opponent_square / 3][opponent_square % 3][0] ==
+                                           0) {
+                                            compiter_input(
+                                                opponent_square / 3, opponent_square % 3);
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                            break;
                         }
                         break;
                     }
                 }
             }
+            computer_checked = false;
         } else {
             if(is_win)
                 add_exp(8, app);
