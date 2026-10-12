@@ -602,7 +602,7 @@ void draw_callback(Canvas* canvas, void* ctx) {
         draw_game_NoSignal(canvas, app);
         break;
     case game_Memory:
-        draw_game_Memory(canvas);
+        draw_game_Memory(canvas, app);
         break;
     case going_to_sleep:
         draw_going_to_sleep_scene(canvas, app);

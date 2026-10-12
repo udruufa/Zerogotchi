@@ -7,4 +7,4 @@
 
 void init_new_game_Memory();
 void handle_input_game_Memory(ZerogotchiEvent* event, AppContext* app);
-void draw_game_Memory(Canvas* canvas);
+void draw_game_Memory(Canvas* canvas, AppContext* app);
