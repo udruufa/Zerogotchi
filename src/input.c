@@ -1,4 +1,3 @@
-#include "init.h"
 #include "input.h"
 #include "stats.h"
 #include "storage.h"
@@ -119,7 +118,8 @@ bool handle_input(ZerogotchiEvent* event, AppContext* app) {
                 if(!app->game_stats.is_sleeping) {
                     switch(app->selectedAction) {
                     case eat:
-                        if(app->game_stats.hunger < MAX_STAT) {
+                        if(app->game_stats.hunger < MAX_STAT &&
+                           app->game_stats.eat_count < MAX_EAT_COUNT) {
                             app->current_y = FOOD_SARDINE_Y;
                             app->action = eating;
                         } else {
@@ -161,13 +161,14 @@ bool handle_input(ZerogotchiEvent* event, AppContext* app) {
                         break;
                     case sleep:
                         app->animation.is_animating = true;
-                        app->animation.frames = 8;
+                        app->animation.frames = 4;
                         app->animation.animation_frame = 0;
                         app->action = going_to_sleep;
                         app->current_x = GO_TO_SLEEP_YES_X;
                         break;
                     case heal:
-                        if(app->game_stats.health < MAX_STAT) {
+                        if(app->game_stats.health < MAX_STAT &&
+                           app->game_stats.heal_count < MAX_HEAL_COUNT) {
                             app->current_y = MEDICINES_VITAMINS_Y;
                             app->action = healing;
                         } else {
@@ -194,6 +195,10 @@ bool handle_input(ZerogotchiEvent* event, AppContext* app) {
                     case info:
                         app->action = informing;
                         break;
+                    case settings:
+                        app->current_y = SETTINGS_SOUND_Y;
+                        app->action = in_settings;
+                        break;
                     default:
                         app->action = sleeping;
                         break;
@@ -202,6 +207,7 @@ bool handle_input(ZerogotchiEvent* event, AppContext* app) {
             } else {
                 switch(app->action) {
                 case eating:
+                    app->game_stats.eat_count++;
                     add_exp(2, app);
                     if(app->current_y == FOOD_SARDINE_Y) {
                         increase_stat(&app->game_stats.happiness, 1); //happiness +1
@@ -259,6 +265,7 @@ bool handle_input(ZerogotchiEvent* event, AppContext* app) {
                     app->action = NONE;
                     break;
                 case healing:
+                    app->game_stats.heal_count++;
                     add_exp(1, app);
                     if(app->current_y == MEDICINES_VITAMINS_Y) {
                         increase_stat(&app->game_stats.health, 2); //health +2
@@ -302,8 +309,10 @@ bool handle_input(ZerogotchiEvent* event, AppContext* app) {
                     }
                     break;
                 case pet_selection:
-                    init_new_game(app);
-                    app->action = NONE;
+                    app->action = init;
+                    app->animation.is_animating = true;
+                    app->animation.frames = 13;
+                    app->animation.animation_frame = 0;
                     break;
                 default:
                     break;

@@ -1,9 +1,24 @@
 #include "sleep_scene.h"
 
-void draw_going_to_sleep_scene(Canvas* canvas, uint32_t current_x) {
+void draw_going_to_sleep_scene(Canvas* canvas, AppContext* app) {
     canvas_clear(canvas);
 
-    canvas_draw_icon(canvas, 0, 0, &I_go_to_sleep_scene);
+    switch(app->game_stats.type) {
+    case(DOLPHIN):
+        canvas_draw_icon(canvas, 0, 0, &I_dolphin_sleep_animation_3);
+        break;
+    case(DRAGON):
+        canvas_draw_icon(canvas, 0, 0, &I_dragon_sleep_animation_3);
+        break;
+    case(RABBIT):
+        canvas_draw_icon(canvas, 0, 0, &I_rabbit_sleep_animation_3);
+        break;
+    case(TURTLE):
+        canvas_draw_icon(canvas, 0, 0, &I_turtle_sleep_animation_3);
+        break;
+    default:
+        break;
+    }
 
     canvas_draw_icon(canvas, 10, 50, &I_sleep_btn);
     canvas_draw_icon(canvas, 68, 50, &I_sleep_btn);
@@ -13,13 +28,13 @@ void draw_going_to_sleep_scene(Canvas* canvas, uint32_t current_x) {
     elements_multiline_text_aligned(
         canvas, GO_TO_SLEEP_NO_X, 56, AlignCenter, AlignCenter, "Not now");
 
-    if(current_x == GO_TO_SLEEP_YES_X) {
+    if(app->current_x == GO_TO_SLEEP_YES_X) {
         canvas_draw_icon(canvas, 10, 50, &I_sleep_btn_hover);
         canvas_invert_color(canvas);
         elements_multiline_text_aligned(
             canvas, GO_TO_SLEEP_YES_X, 56, AlignCenter, AlignCenter, "Go to sleep");
         canvas_invert_color(canvas);
-    } else if(current_x == GO_TO_SLEEP_NO_X) {
+    } else if(app->current_x == GO_TO_SLEEP_NO_X) {
         canvas_draw_icon(canvas, 68, 50, &I_sleep_btn_hover);
         canvas_invert_color(canvas);
         elements_multiline_text_aligned(
